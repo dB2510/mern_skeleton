@@ -2,10 +2,11 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from './../webpack.config.client';
+import config from '../config/config';
 
 const compile = (app) => {
 
-    if(process.env.NODE_ENV == 'development') {
+    if(config.env == 'development') {
         const compiler = webpack(webpackConfig);
         
         const middleware = webpackMiddleware(compiler, {
@@ -19,4 +20,4 @@ const compile = (app) => {
 
 export default {
     compile
-}
+};
