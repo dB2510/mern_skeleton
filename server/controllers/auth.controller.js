@@ -45,7 +45,23 @@ const signout = (req, res) => {
 // The express-jwt module is a piece of middleware that validates JSON Web Tokens.
 //  Run yarn add express-jwt from the command line to install express-jwt.
 
-// const requireSignin = … 
-// const hasAuthorization = (req, res) => { … }
+const requireSignin = expressJwt({
+    // The requireSignin method in auth.controller.js uses express-jwt to verify that
+    // the incoming request has a valid JWT in the Authorization header. If the token
+    // is valid, it appends the verified user's ID in an 'auth' key to the request object; 
+    // otherwise, it throws an authentication error.
+    secret: config.jwtSecret,
+    userProperty: 'auth'
+});
 
-// export default { signin, signout, requireSignin, hasAuthorization }
+
+const hasAuthorization = (req, res, next) => {
+    const authorized = req.profile && req.auth && req.profile._id == req.auth._id;
+    if(!(authorized)) {
+        return res.status('403').json({
+            error: 'User not authorized'
+        });
+    }
+};
+
+export default { signin, signout, requireSignin, hasAuthorization };
