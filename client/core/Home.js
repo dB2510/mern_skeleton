@@ -34,7 +34,6 @@ const Home = () => {
                 <Typography variant="body2" component="p">
                     Welcome to mern skeleton home page
                 </Typography>
-                <Link to="/users">Users</Link>
             </CardContent>
         </Card>
     );
