@@ -39,7 +39,7 @@ const Profile = ({ match }) => {
     useEffect(() => {
         const abortController = new AbortController();
         const signal = abortController.signal;
-        const jwt = auth.isAuthenticated();
+        
         read({
             userId: match.params.userId
         }, {t: jwt.token}, signal).then((data) => {
@@ -72,7 +72,7 @@ const Profile = ({ match }) => {
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary={user.name} secondary={user.email}/>{
-                        auth.isAuthenticated().user && auth.isAuthenticated.user._id == user._id && 
+                        auth.isAuthenticated().user && auth.isAuthenticated().user._id == user._id && 
                         (<ListItemSecondaryAction>
                             <Link to={"/user/edit/" + user._id}>
                                 <IconButton aria-label="Edit" color="primary">

@@ -10,8 +10,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import auth from './../auth/auth-helper';
 import {Redirect} from 'react-router-dom';
 import {signin} from './api-auth.js';
-import { DiscFull } from '@material-ui/icons';
-import { sign } from 'jsonwebtoken';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -54,7 +52,7 @@ const Signin = (props) => {
             password: values.password || undefined
         };
 
-        sign(user).then((data) => {
+        signin(user).then((data) => {
             if(data.error) {
                 setValues({ ...values, error: data.error });
             } else {
